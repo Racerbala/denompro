@@ -8,45 +8,45 @@ import { FormsModule } from "@angular/forms";
 })
 export class ConversionComponent implements OnInit {
   constructor() {}
+  denoming: any = [
+    { denomination: 2000, count: 0 },
+    { denomination: 500, count: 0 },
+    { denomination: 200, count: 0 },
+    { denomination: 100, count: 0 },
+    { denomination: 50, count: 0 },
+  ];
+
+  denomination = [2000, 500, 200, 100, 50];
+  counts: any = [];
   amount: any = 0;
-  denom2: number = 0;
-  denom5: number = 0;
-  denom20: number = 0;
-  denom10: number = 0;
-  denom50: number = 0;
-  quo: number = 0;
+  objectData: any;
+  rem: number = 0;
   disp = false;
+  cape = 0;
+  total = 0;
 
   ngOnInit(): void {}
   convert() {
-    if (this.amount % 50 !== 0) {
-      this.disp = false;
-      return (this.amount = "Enter multiples of 50's");
-    } else this.disp = true;
-    if (this.amount >= 2000) {
-      this.denom2 = Math.floor(this.amount / 2000);
-      this.quo = this.amount % 2000;
-      this.amount = this.quo;
-    } else this.denom2 = 0;
-    if (this.amount >= 500) {
-      this.denom5 = Math.floor(this.amount / 500);
-      this.quo = this.amount % 500;
-      this.amount = this.quo;
-    } else this.denom5 = 0;
-    if (this.amount >= 200) {
-      this.denom20 = Math.floor(this.amount / 200);
-      this.quo = this.amount % 200;
-      this.amount = this.quo;
-    } else this.denom20 = 0;
-    if (this.amount >= 100) {
-      this.denom10 = Math.floor(this.amount / 100);
-      this.quo = this.amount % 100;
-      this.amount = this.quo;
-    } else this.denom10 = 0;
-    if (this.amount >= 50) {
-      this.denom50 = Math.floor(this.amount / 50);
-      this.quo = this.amount % 50;
-      this.amount = this.quo;
-    } else this.denom50 = 0;
+    this.counts = [];
+    this.cape = 0;
+    this.total = 0;
+    this.rem = this.amount;
+    for (let i = 0; i < this.denoming.length; i++) {
+      if (this.amount > 0 && this.amount % 50 == 0) {
+        this.denoming[i].count = Math.floor(
+          this.rem / this.denoming[i].denomination
+        );
+        this.total = this.total + this.denoming[i].count;
+        this.rem = this.rem % this.denoming[i].denomination;
+        this.cape = i;
+      } else this.amount = "please enter a valid amount";
+    }
+    if ((this.cape = 4)) {
+      this.disp = true;
+      this.counts = this.denoming;
+      this.objectData = this.counts.objectData;
+
+      console.log(this.total);
+    }
   }
 }

@@ -6,12 +6,20 @@
   <div>
     <button class="btn btn-primary" (click)="convert()">Submit</button>
   </div>
-
   <div *ngIf="disp">
-    <p>Denomitation of 2000: {{ denom2 }}</p>
-    <p>Denomitation of 500 : {{ denom5 }}</p>
-    <p>Denomitation of 200 : {{ denom20 }}</p>
-    <p>Denomitation of 100 : {{ denom10 }}</p>
-    <p>Denomitation of 50 : {{ denom50 }}</p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Denominations count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let objKey of counts | keyvalue; let j = index">
+          <td>{{ objKey.denomination }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>The total count is: {{ total }}</h3>
   </div>
 </div>
